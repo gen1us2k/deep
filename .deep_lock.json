@@ -1,0 +1,22 @@
+{
+  "writen_at": "2017-03-19T16:59:18.0319799Z",
+  "name": "github.com/dlsniper/deep",
+  "version": "HEAD",
+  "dependencies": [
+    {
+      "name": "github.com/inconshreveable/mousetrap",
+      "version": "HEAD",
+      "commit_hash": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+    },
+    {
+      "name": "github.com/spf13/cobra",
+      "version": "HEAD",
+      "commit_hash": "7be4beda01ec05d0b93d80b3facd2b6f44080d94"
+    },
+    {
+      "name": "github.com/spf13/pflag",
+      "version": "HEAD",
+      "commit_hash": "9ff6c6923cfffbcd502984b8e0c80539a94968b7"
+    }
+  ]
+}

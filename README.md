@@ -11,6 +11,12 @@ it like a nuclear bomb for your packages. Don't touch it unless you know what
 you are doing and are prepared to take all the blame if something goes horribly
 wrong (which it will).
 
+## Current status
+
+This can almost vendor itself but it won't read the lock/manifest files when
+running again and it will cause issues when importing the dependencies as again.
+More to come in the next days.
+
 ## Project goals
 
 Have a package manager for Go projects that is easy to use and provides the
@@ -18,8 +24,12 @@ common needed features across a wide enough range of use-cases.
 
 ## Steps to implement this
 
-- [ ] decide to follow or extend the manifest/lock files of [golang/dep](https://github.com/golang/dep)
-- [ ] decide on core functionality
+- [x] decide to follow or extend the manifest/lock files of [golang/dep](https://github.com/golang/dep)
+  - decision taken, this won't follow the golang/dep manifest/lock files but
+it will have a compatibility mode with it
+- [x] decide on core functionality
+  - core functionality will be: adding dependencies, updating and removing
+them. Versions will be optional for each of these operations.
 - [ ] implement basic tool which satisfies the core functionality
 - [ ] release it into the wild
 - [ ] collect and evolve based on the users feedback
@@ -37,7 +47,7 @@ deep rm <package>
 - vendor flattening will be a thing done by default, no questions asked
 - stripping of things: ` --strip=tests,examples,main,all `, with ` all ` as
 default
-- alternative to stripping, `  --keep=none,tests,examples,main,all ` with
+- alternative to stripping, `  --keep=none,tests,main,all ` with
 ` none ` as default
 - the manifest will dictate the list of OS/arch combos, otherwise the current
 one is assumed
