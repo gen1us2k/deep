@@ -1,0 +1,18 @@
+{
+  "name": "github.com/dlsniper/deep",
+  "version": "HEAD",
+  "dependencies": [
+    {
+      "name": "github.com/inconshreveable/mousetrap",
+      "version": "HEAD"
+    },
+    {
+      "name": "github.com/spf13/cobra",
+      "version": "HEAD"
+    },
+    {
+      "name": "github.com/spf13/pflag",
+      "version": "HEAD"
+    }
+  ]
+}
