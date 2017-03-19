@@ -245,7 +245,11 @@ func (d *Deep) writeDeepFiles(pwd, currentPkg string, packages []Package) {
 	p := Package{
 		Name:         currentPkg,
 		Version:      "HEAD",
-		Dependencies: packages,
+		Dependencies: make([]Package, len(packages)),
+	}
+
+	if copy(p.Dependencies, packages) != len(packages) {
+		panic("Something went terribly wrong while doing an internal copy of the dependency slice")
 	}
 
 	m := &Manifest{
@@ -257,6 +261,10 @@ func (d *Deep) writeDeepFiles(pwd, currentPkg string, packages []Package) {
 		os.Exit(1)
 	}
 
+	p.Dependencies = make([]Package, len(packages))
+	if copy(p.Dependencies, packages) != len(packages) {
+		panic("Something went terribly wrong while doing an internal copy of the dependency slice")
+	}
 	l := &Lock{
 		Package: p,
 	}
