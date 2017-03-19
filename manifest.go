@@ -29,6 +29,9 @@ type Manifest struct {
 const manifestFileName = "deep.json"
 
 func (m *Manifest) writeFile(path string) error {
+	for idx := range m.Dependencies {
+		m.Dependencies[idx].CommitHash = ""
+	}
 	man, err := json.MarshalIndent(m, "", "  ")
 	if err != nil {
 		return err
