@@ -1,0 +1,20 @@
+machine:
+  environment:
+    PROJECT_NAME: deep
+    DEBIAN_FRONTEND: noninteractive
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - ./container-make.sh
+
+test:
+  override:
+    - ./container-test.sh
+
+deployment:
+  prod:
+    branch: master
+    commands:
+      - ./container-deploy.sh
