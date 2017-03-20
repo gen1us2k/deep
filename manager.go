@@ -37,14 +37,14 @@ type (
 
 const pathSeparatorString = string(os.PathSeparator)
 
-func (d *Deep) listPackages(pwd, currentPkg string) []Package {
+func (d *Deep) listPackages(pwd, currentPkg string, ignoreTestFiles bool) []Package {
 	var packages []Package
 	for _, provider := range d.providers {
 		if !provider.canUse(pwd, currentPkg) {
 			continue
 		}
 
-		pkgs, err := provider.packages(pwd, currentPkg)
+		pkgs, err := provider.packages(pwd, currentPkg, ignoreTestFiles)
 		if err != nil {
 			d.log("Error while getting packages: %v", err)
 			os.Exit(1)
@@ -282,7 +282,9 @@ func (d *Deep) Run(pwd, currentPkg string, keepTypes map[string]struct{}, args [
 		os.Exit(1)
 	}
 
-	packages := d.listPackages(pwd, currentPkg)
+	_, wipeTests := keepTypes["test"]
+
+	packages := d.listPackages(pwd, currentPkg, wipeTests)
 	if len(packages) == 0 {
 		d.log("No packages found")
 		return
@@ -298,7 +300,7 @@ func (d *Deep) Run(pwd, currentPkg string, keepTypes map[string]struct{}, args [
 		d.wipeVCS(pwd, packages)
 	}
 
-	if _, ok := keepTypes["test"]; !ok {
+	if wipeTests {
 		d.wipeTestFiles(pwd, currentPkg, packages)
 	}
 
@@ -321,7 +323,7 @@ func New(logger Logger) *Deep {
 
 	providers := []provider{
 		newDeep(logger),
-		newGoList(logger),
+		newGoParser(logger),
 	}
 
 	return &Deep{

@@ -24,7 +24,7 @@ func (d *deep) canUse(pwd, currentPkg string) bool {
 	return false
 }
 
-func (d *deep) packages(pwd, currentPkg string) ([]Package, error) {
+func (d *deep) packages(pwd, currentPkg string, ignoreTestFiles bool) ([]Package, error) {
 	return nil, errors.New("not implemented yet")
 }
 

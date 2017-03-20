@@ -16,5 +16,5 @@ package deep
 
 type provider interface{
 	canUse(pwd, currentPkg string) bool
-	packages(pwd, currentPkg string) ([]Package, error)
+	packages(pwd, currentPkg string, ignoreTestFiles bool) ([]Package, error)
 }
